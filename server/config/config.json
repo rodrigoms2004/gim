@@ -1,0 +1,26 @@
+{
+    "test": {
+        "host" : "172.16.105.153",
+        "user" : "root", 
+        "password": "cisco",
+        "port": 3306,
+        "connectionLimit": 200,
+        "connectTimeout": 2000,
+        "queueLimit": 0,
+        "debug": false,
+        "waitForConnection": true,
+        "compression": true
+    },
+    "development": {
+        "host" : "172.16.105.153",
+        "user" : "root", 
+        "password": "cisco",
+        "port": 3306,
+        "connectionLimit": 200,
+        "connectTimeout": 2000,
+        "queueLimit": 0,
+        "debug": false,
+        "waitForConnection": true,
+        "compression": true
+    }
+}
