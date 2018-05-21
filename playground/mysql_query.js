@@ -1,3 +1,8 @@
+// https://www.npmjs.com/package/mysql#performing-queries
+// https://stackoverflow.com/questions/18496540/node-js-mysql-connection-pooling?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+// http://cangaceirojavascript.com.br/lidando-com-conexoes-banco-plataforma-node/
+// https://www.tutorialkart.com/nodejs/nodejs-mysql-result-object/
+
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host : '172.16.105.153',

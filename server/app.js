@@ -13,7 +13,6 @@ var app = express();
 
 app.use(bodyParser.json()); // middleware
 
-app.use(connectionMiddleware(pool));
 
 //middleware, used to show where user is going...
 app.use((req, res, next) => {
@@ -24,6 +23,8 @@ app.use((req, res, next) => {
   
     next();
   });
+
+app.use(connectionMiddleware(pool));
 
 // ROUTES
 app.use('/api', require('./route/api'));

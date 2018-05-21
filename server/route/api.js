@@ -22,8 +22,8 @@ const gestaoOcorrenciaController = require('../controllers/gestaoOcorrenciaContr
 // var {authenticate} = require('./../middleware/authenticate');
 
 // API Restful for gestao_ocorrencia
-router.get('/gestaoocorrencia', gestaoOcorrenciaController.byIdNomeGrupo);
-// router.get('/calculatempo', gestaoOcorrenciaController.calculaTempo);
+router.get('/gestaoocorrencia/:id', gestaoOcorrenciaController.byIdNomeGrupo);
+router.get('/calculatempo/:start&:stop', gestaoOcorrenciaController.calculaTempo);
 
 
 // API Restful for palitagem_incidentes

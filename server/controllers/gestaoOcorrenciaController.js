@@ -1,38 +1,55 @@
 'use strict'
 
-let gestOcorrenciaModel = require('./../models/gestaoOcorrenciaModel');
 const _ = require('lodash');
 
-// connModel.get_data(query_str);
 
 let gestaoOcorrenciaController = {
-
+    
     byIdNomeGrupo: (req, res) => {
-        req.connection.query('SELECT * FROM gestao_ocorrencia.anexo limit 10', (err, data) => {
+        let grupo_id = req.params.id;
 
-            if (err) return next(err);
-            res.json(data);
+        // localhost:3000/api/gestaoOcorrencia/465451
+
+        let query_str = `call gestao_ocorrencia.ocorrencia_id_grupo('${grupo_id}')`;
+        req.connection.query(query_str, (err, data) => {
+            // if (err) return next(err);
+            if(err) {
+                res.status(err.status || 500).send(err.message || `Don't force it; get a larger hammer.`);
+            } else {
+                res.json(data);
+            }
         });
     },
 
-    calculaTempo: async(req, res) => {
+    calculaTempo: (req, res) => {
+        let date_range = {
+            date_start : req.params.start,
+            date_stop : req.params.stop
+        }
+        
+        // localhost:3000/api/calculatempo/2017-02-20&2017-02-21
 
+        let query_str = `SELECT gestao_ocorrencia.calcula_tempo_duracao('${date_range.date_start}', '${date_range.date_stop}') as total_horas`
+        // console.log(query_str);
+
+        // req.connection.query(`SELECT gestao_ocorrencia.calcula_tempo_duracao('2017/02/20', '2017/02/21') as total_horas`, (err, data) => {
+        try {
+            req.connection.query(query_str, (err, data) => {
+                // if (err) return next(err);
+                if(err) {
+                    // res.status(err.status || 500).send(err.message || `Don't force it; get a larger hammer.`);
+                    res.status(500).send(`Don't force it; get a larger hammer.`);
+                } else {
+                    res.json(data);
+                }
+            });    
+        } catch (e) {
+            console.log(e);
+        }
+        
     }
 
 };  // end gestaoOcorrenciaController
 
 module.exports = gestaoOcorrenciaController;
 
-
-
-// try {
-
-//     pool_gest.getData(query_str, () => {});  
-//     let query_str = "SELECT * FROM gestao_ocorrencia.anexo limit 10";
-//     gestOcorrenciaModel.getData(query_str, (data) => {
-        
-//     });            
-//     res.send({gestOcorr})
-// } catch(e) {
-//     res.status(400).send(e);
-// }
